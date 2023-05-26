@@ -1,5 +1,7 @@
 import 'package:animations/animations.dart';
+import 'package:debug_welcome/pages/signup_page.dart';
 import 'package:flutter/material.dart';
+import '../pages/login_page.dart';
 
 class CenterNextButton extends StatelessWidget {
   final AnimationController animationController;
@@ -7,6 +9,18 @@ class CenterNextButton extends StatelessWidget {
   const CenterNextButton(
       {Key? key, required this.animationController, required this.onNextClick})
       : super(key: key);
+
+  void _NavigateLoginPage(BuildContext context) {
+    Navigator.push(
+      context, MaterialPageRoute(builder: (context) => LoginPageForm()),
+    );
+  }
+
+  void _NavigateRegistPage(BuildContext context) {
+    Navigator.push(
+      context, MaterialPageRoute(builder: (context) => RegistPageForm()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,15 +109,15 @@ class CenterNextButton extends StatelessWidget {
                     child: _signUpMoveAnimation.value > 0.7
                         ? InkWell(
                             key: ValueKey('Sign Up button'),
-                            onTap: onNextClick,
-                            child: Padding(
+                            onTap: () => _NavigateRegistPage(context),
+                            child: const Padding(
                               padding: EdgeInsets.only(left: 16.0, right: 16.0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Sign Up',
+                                    "Create account",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -145,14 +159,13 @@ class CenterNextButton extends StatelessWidget {
                       fontWeight: FontWeight.normal,
                     ),
                   ),
+
+                  const SizedBox(
+                    width: 4,
+                  ),
+
                   GestureDetector(
-                    // onTap: () {
-                    //   // Navigator
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(builder: (context) => LoginPage()),
-                    //   );
-                    // },
+                    onTap: () => _NavigateLoginPage(context),
                     child: Text(
                       'Login',
                       style: TextStyle(
@@ -185,13 +198,13 @@ class CenterNextButton extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.only(bottom: 14),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          for (var i = 0; i < 4; i++)
+          for (var i = 0; i < 3; i++)
             Padding(
-              padding: const EdgeInsets.all(4),
+              padding: const EdgeInsets.all(8),
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 480),
                 decoration: BoxDecoration(
@@ -200,7 +213,7 @@ class CenterNextButton extends StatelessWidget {
                       ? Color(0xff132137)
                       : Color(0xffE3E4E4),
                 ),
-                width: 10,
+                width: 25,
                 height: 10,
               ),
             )

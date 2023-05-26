@@ -7,16 +7,16 @@ import 'package:debug_welcome/components/top_back_skip_view.dart';
 import 'package:debug_welcome/components/welcome_view.dart';
 import 'package:flutter/material.dart';
 
-class IntroductionAnimationScreen extends StatefulWidget {
-  const IntroductionAnimationScreen({Key? key}) : super(key: key);
+class OnBoardingScreen extends StatefulWidget {
+  const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override
-  _IntroductionAnimationScreenState createState() =>
-      _IntroductionAnimationScreenState();
+  _OnBoardingScreenState createState() =>
+      _OnBoardingScreenState();
 }
 
-class _IntroductionAnimationScreenState
-    extends State<IntroductionAnimationScreen> with TickerProviderStateMixin {
+class _OnBoardingScreenState
+    extends State<OnBoardingScreen> with TickerProviderStateMixin {
   AnimationController? _animationController;
 
   @override

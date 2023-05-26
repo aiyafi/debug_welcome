@@ -20,21 +20,21 @@ class MyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
       statusBarBrightness:
           !kIsWeb && Platform.isAndroid ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor: Colors.white,
+      systemNavigationBarColor: Color(0xFFf7ebe1),
       systemNavigationBarDividerColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
     return MaterialApp(
-      title: 'Flutter UI',
+      title: 'MenRis',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         platform: TargetPlatform.iOS,
       ),
-      home: IntroductionAnimationScreen(),
+      home: OnBoardingScreen(),
     );
   }
 }
+
 
 class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));

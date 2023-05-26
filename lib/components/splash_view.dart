@@ -16,10 +16,10 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     final _introductionanimation =
-        Tween<Offset>(begin: Offset(0, 0), end: Offset(0.0, -2.0))
+        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(0.0, -2.0))
             .animate(CurvedAnimation(
       parent: widget.animationController,
-      curve: Interval(
+      curve: const Interval(
         0.0,
         0.2,
         curve: Curves.fastOutSlowIn,
@@ -33,7 +33,7 @@ class _SplashViewState extends State<SplashView> {
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Container(
-                margin: EdgeInsets.only(top: 200), // Memberikan margin ke atas
+                margin: const EdgeInsets.only(top: 200), // Memberikan margin ke atas
                 child: SvgPicture.asset(
                   'assets/introduction_animation/logistics.svg',
                   width: 200,
@@ -42,7 +42,7 @@ class _SplashViewState extends State<SplashView> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 25, bottom: 8),
+              padding: const EdgeInsets.only(top: 25, bottom: 8),
               child: Text(
                 "MenRis",
                 style: GoogleFonts.poppins(
@@ -52,7 +52,7 @@ class _SplashViewState extends State<SplashView> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 44, right: 44),
+              padding: const EdgeInsets.only(left: 44, right: 44),
               child: Text(
                 "Keep track of your inventory with ease.",
                 style: GoogleFonts.poppins(
@@ -61,7 +61,7 @@ class _SplashViewState extends State<SplashView> {
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 96,
             ),
             Padding(
@@ -73,7 +73,7 @@ class _SplashViewState extends State<SplashView> {
                 },
                 child: Container(
                   height: 58,
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: 56.0,
                     right: 56.0,
                     top: 16,
@@ -81,7 +81,7 @@ class _SplashViewState extends State<SplashView> {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
-                    color: Color(0xff132137),
+                    color: const Color(0xff132137),
                   ),
                   child: Text(
                     "Let's begin",

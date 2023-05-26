@@ -73,7 +73,7 @@ class WelcomeView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 36), // Menambahkan jarak vertikal di sini
+              SizedBox(height: 36),
               SlideTransition(
                 position: _welcomeFirstHalfAnimation,
                 child: Text(
@@ -86,7 +86,7 @@ class WelcomeView extends StatelessWidget {
               ),
               Padding(
                 padding:
-                    EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 16),
+                    EdgeInsets.only(left: 66, right: 66, top: 16, bottom: 16),
                 child: Text(
                   "Manage your inventory with ease and efficiency.",
                   style: TextStyle(
