@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:debug_welcome/introduction_animation_screen.dart';
+import 'package:debug_welcome/pages/dasboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
       statusBarBrightness:
           !kIsWeb && Platform.isAndroid ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor: Color(0xFFf7ebe1),
+      systemNavigationBarColor: Colors.black,
       systemNavigationBarDividerColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         platform: TargetPlatform.iOS,
       ),
-      home: OnBoardingScreen(),
+      home: DashboardPage(),
     );
   }
 }
