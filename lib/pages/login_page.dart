@@ -4,26 +4,25 @@ import 'package:debug_welcome/pages/signup_page.dart';
 import 'package:debug_welcome/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '/pages/dasboard_page.dart';
 
 class LoginPageForm extends StatefulWidget {
-  const LoginPageForm({super.key});
-
-  // void _NavigateDashboardState(BuildContext context) {
-  //   Navigator.push(
-  //     context, MaterialPageRoute(
-  //       builder: (context) => dashboardPage(),
-  //     ),
-  //   );
-  // }
+  const LoginPageForm({Key? key});
 
   @override
   State<LoginPageForm> createState() => _LoginPageFormState();
 }
 
 class _LoginPageFormState extends State<LoginPageForm> {
-  //Text edit controller
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
+
+  void _navigateToDashboard(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DashboardPage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +36,6 @@ class _LoginPageFormState extends State<LoginPageForm> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
-                //MenRis
                 Text(
                   "MenRis",
                   style: GoogleFonts.poppins(
@@ -51,7 +48,6 @@ class _LoginPageFormState extends State<LoginPageForm> {
                   height: 10,
                 ),
 
-                //Message
                 const Text(
                   "Sign in to continue",
                   style: TextStyle(
@@ -63,7 +59,6 @@ class _LoginPageFormState extends State<LoginPageForm> {
                   height: 35,
                 ),
 
-                //Email
                 LoginTextField(
                   controller: emailTextController,
                   hiddenPassword: false,
@@ -74,7 +69,6 @@ class _LoginPageFormState extends State<LoginPageForm> {
                   height: 15,
                 ),
 
-                //PW
                 LoginTextField(
                   controller: passwordTextController,
                   hiddenPassword: true,
@@ -85,33 +79,30 @@ class _LoginPageFormState extends State<LoginPageForm> {
                   height: 25,
                 ),
 
-                //Btn
                 ButtonLoginPage(
-                  onTap: () {}, 
-                  text: "Sign In"
+                  onTap: () {
+                    _navigateToDashboard(context);
+                  },
+                  text: "Sign In",
                 ),
 
                 const SizedBox(
                   height: 25,
                 ),
 
-                //Sign Up Page
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Don't have an acoount?",
+                      "Don't have an account?",
                       style: TextStyle(
                         color: Colors.grey,
                       ),
                     ),
-
                     const SizedBox(
-                        width: 8,
+                      width: 8,
                     ),
-
                     GestureDetector(
-                      onTap: () {},
                       child: const Text(
                         "Register Now",
                         style: TextStyle(
