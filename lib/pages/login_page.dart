@@ -5,6 +5,7 @@ import 'package:debug_welcome/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/pages/dasboard_page.dart';
+import 'package:debug_welcome/pages/dasboard_page.dart';
 
 class LoginPageForm extends StatefulWidget {
   const LoginPageForm({Key? key});
@@ -43,53 +44,46 @@ class _LoginPageFormState extends State<LoginPageForm> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-
                 const SizedBox(
                   height: 10,
                 ),
-
                 const Text(
                   "Sign in to continue",
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
-
                 const SizedBox(
                   height: 35,
                 ),
-
                 LoginTextField(
                   controller: emailTextController,
                   hiddenPassword: false,
                   hintLoginText: "Email",
                 ),
-
                 const SizedBox(
                   height: 15,
                 ),
-
                 LoginTextField(
                   controller: passwordTextController,
                   hiddenPassword: true,
                   hintLoginText: "Password",
                 ),
-
                 const SizedBox(
                   height: 25,
                 ),
-
                 ButtonLoginPage(
                   onTap: () {
-                    _navigateToDashboard(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DashboardPage()),
+                    );
                   },
                   text: "Sign In",
                 ),
-
                 const SizedBox(
                   height: 25,
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -8,6 +8,13 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  void _navigateToDashboard(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DashboardPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

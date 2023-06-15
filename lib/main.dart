@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:debug_welcome/introduction_animation_screen.dart';
-import 'package:debug_welcome/pages/dasboard_page.dart';
+import 'package:debug_welcome/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:debug_welcome/pages/dasboard_page.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
@@ -31,11 +32,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         platform: TargetPlatform.iOS,
       ),
-      home: DashboardPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => OnBoardingScreen(),
+        '/login': (context) => LoginPageForm(),
+        '/dashboard': (context) => DashboardPage(),
+      },
     );
   }
 }
-
 
 class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));

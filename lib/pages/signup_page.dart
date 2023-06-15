@@ -1,5 +1,6 @@
 import 'package:debug_welcome/components/button_login.dart';
 import 'package:debug_welcome/components/login_text_field.dart';
+import 'package:debug_welcome/pages/dasboard_page.dart';
 import 'package:debug_welcome/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,8 +20,9 @@ class _RegistPageFormState extends State<RegistPageForm> {
   final confirmPasswordTextController = TextEditingController();
 
   void _NavigateLoginOnRegistState(BuildContext context) {
-    Navigator.push(
-      context, MaterialPageRoute(builder: (context) => LoginPageForm()),
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => DashboardPage()),
     );
   }
 
@@ -36,7 +38,6 @@ class _RegistPageFormState extends State<RegistPageForm> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
                 //MenRis
                 Text(
                   "MenRis",
@@ -108,8 +109,10 @@ class _RegistPageFormState extends State<RegistPageForm> {
 
                 //Btn
                 ButtonLoginPage(
-                  onTap: () {}, 
-                  text: "Sign Up"
+                  onTap: () {
+                    _NavigateLoginOnRegistState(context);
+                  },
+                  text: "Sign Up",
                 ),
 
                 const SizedBox(
@@ -126,11 +129,9 @@ class _RegistPageFormState extends State<RegistPageForm> {
                         color: Colors.grey,
                       ),
                     ),
-
                     const SizedBox(
-                        width: 8,
+                      width: 8,
                     ),
-
                     GestureDetector(
                       onTap: () {},
                       child: const Text(
