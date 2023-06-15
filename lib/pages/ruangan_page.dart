@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class RuanganPage extends StatefulWidget {
   @override
@@ -6,8 +9,34 @@ class RuanganPage extends StatefulWidget {
 }
 
 class _RuanganPageState extends State<RuanganPage> {
-  List<String> daftarRuangan = [];
+  List daftarRuangan = [];
   String selectedRuangan = '';
+
+  Future _getData() async {
+    try {
+      final response = await http.get(
+          Uri.parse('https://192.168.1.7/api_inventaris/ruangan_read.php'));
+
+      if (response.statusCode == 200) {
+        print(response.body);
+        final data = jsonDecode(response.body);
+        setState(() {
+          daftarRuangan = data;
+        });
+      }
+    } catch (e) {
+      // print("Coba");
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    _getData();
+    print(daftarRuangan);
+    // print(daftarBarang.length);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
