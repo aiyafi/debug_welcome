@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '/pages/dasboard_page.dart';
 
 class LoginPageForm extends StatefulWidget {
-  const LoginPageForm({super.key, Key? key});
+  const LoginPageForm({Key? key});
 
   @override
   State<LoginPageForm> createState() => _LoginPageFormState();
