@@ -3,6 +3,8 @@ import 'barang_page.dart';
 import 'ruangan_page.dart';
 
 class DashboardPage extends StatefulWidget {
+  const DashboardPage({super.key});
+
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
@@ -11,7 +13,7 @@ class _DashboardPageState extends State<DashboardPage> {
   void _navigateToDashboard(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => DashboardPage()),
+      MaterialPageRoute(builder: (context) => const DashboardPage()),
     );
   }
 
@@ -19,27 +21,27 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard'),
+        title: const Text('Dashboard'),
       ),
       body: Column(
         children: [
           ListTile(
-            leading: Icon(Icons.inventory),
-            title: Text('Barang'),
+            leading: const Icon(Icons.inventory),
+            title: const Text('Barang'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => BarangPage()),
+                MaterialPageRoute(builder: (context) => const BarangPage()),
               );
             },
           ),
           ListTile(
-            leading: Icon(Icons.room),
-            title: Text('Ruangan'),
+            leading: const Icon(Icons.room),
+            title: const Text('Ruangan'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => RuanganPage()),
+                MaterialPageRoute(builder: (context) => const RuanganPage()),
               );
             },
           ),

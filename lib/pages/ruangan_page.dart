@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class RuanganPage extends StatefulWidget {
+  const RuanganPage({super.key});
+
   @override
   _RuanganPageState createState() => _RuanganPageState();
 }
@@ -42,37 +44,40 @@ class _RuanganPageState extends State<RuanganPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ruangan'),
+        title: const Text('Ruangan'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Daftar Ruangan:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             if (daftarRuangan.isEmpty)
-              Text('Ruangan masih kosong')
+              const Text('Ruangan masih kosong')
             else
               Column(
                 children: daftarRuangan
                     .map(
                       (ruangan) => ListTile(
-                        title: Text(ruangan),
+                        title: Text(
+                            daftarRuangan[daftarRuangan.indexOf(ruangan)]
+                                    ['nama_ruangan']
+                                .toString()),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              icon: Icon(Icons.edit),
+                              icon: const Icon(Icons.edit),
                               onPressed: () {
                                 _editRuangan(ruangan);
                               },
                             ),
                             IconButton(
-                              icon: Icon(Icons.delete),
+                              icon: const Icon(Icons.delete),
                               onPressed: () {
                                 _hapusRuangan(ruangan);
                               },
@@ -83,12 +88,12 @@ class _RuanganPageState extends State<RuanganPage> {
                     )
                     .toList(),
               ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 _tambahRuangan();
               },
-              child: Text('Tambah Ruangan'),
+              child: const Text('Tambah Ruangan'),
             ),
           ],
         ),
@@ -102,12 +107,12 @@ class _RuanganPageState extends State<RuanganPage> {
       builder: (BuildContext context) {
         String namaRuangan = '';
         return AlertDialog(
-          title: Text('Tambah Ruangan'),
+          title: const Text('Tambah Ruangan'),
           content: TextField(
             onChanged: (value) {
               namaRuangan = value;
             },
-            decoration: InputDecoration(hintText: 'Nama Ruangan'),
+            decoration: const InputDecoration(hintText: 'Nama Ruangan'),
           ),
           actions: [
             TextButton(
@@ -117,13 +122,13 @@ class _RuanganPageState extends State<RuanganPage> {
                 });
                 Navigator.pop(context);
               },
-              child: Text('Tambah'),
+              child: const Text('Tambah'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Batal'),
+              child: const Text('Batal'),
             ),
           ],
         );
@@ -137,12 +142,12 @@ class _RuanganPageState extends State<RuanganPage> {
       builder: (BuildContext context) {
         String namaRuangan = ruangan;
         return AlertDialog(
-          title: Text('Edit Ruangan'),
+          title: const Text('Edit Ruangan'),
           content: TextField(
             onChanged: (value) {
               namaRuangan = value;
             },
-            decoration: InputDecoration(hintText: 'Nama Ruangan'),
+            decoration: const InputDecoration(hintText: 'Nama Ruangan'),
           ),
           actions: [
             TextButton(
@@ -152,13 +157,13 @@ class _RuanganPageState extends State<RuanganPage> {
                 });
                 Navigator.pop(context);
               },
-              child: Text('Simpan'),
+              child: const Text('Simpan'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Batal'),
+              child: const Text('Batal'),
             ),
           ],
         );
@@ -171,8 +176,8 @@ class _RuanganPageState extends State<RuanganPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Hapus Ruangan'),
-          content: Text('Apakah Anda yakin ingin menghapus ruangan ini?'),
+          title: const Text('Hapus Ruangan'),
+          content: const Text('Apakah Anda yakin ingin menghapus ruangan ini?'),
           actions: [
             TextButton(
               onPressed: () {
@@ -181,13 +186,13 @@ class _RuanganPageState extends State<RuanganPage> {
                 });
                 Navigator.pop(context);
               },
-              child: Text('Hapus'),
+              child: const Text('Hapus'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Batal'),
+              child: const Text('Batal'),
             ),
           ],
         );

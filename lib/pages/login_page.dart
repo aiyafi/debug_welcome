@@ -1,14 +1,11 @@
 import 'package:debug_welcome/components/button_login.dart';
 import 'package:debug_welcome/components/login_text_field.dart';
-import 'package:debug_welcome/pages/signup_page.dart';
-import 'package:debug_welcome/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/pages/dasboard_page.dart';
-import 'package:debug_welcome/pages/dasboard_page.dart';
 
 class LoginPageForm extends StatefulWidget {
-  const LoginPageForm({Key? key});
+  const LoginPageForm({super.key, Key? key});
 
   @override
   State<LoginPageForm> createState() => _LoginPageFormState();
@@ -21,7 +18,7 @@ class _LoginPageFormState extends State<LoginPageForm> {
   void _navigateToDashboard(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => DashboardPage()),
+      MaterialPageRoute(builder: (context) => const DashboardPage()),
     );
   }
 
@@ -29,7 +26,7 @@ class _LoginPageFormState extends State<LoginPageForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xFFf7ebe1),
+      backgroundColor: const Color(0xFFf7ebe1),
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -76,7 +73,7 @@ class _LoginPageFormState extends State<LoginPageForm> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DashboardPage()),
+                      MaterialPageRoute(builder: (context) => const DashboardPage()),
                     );
                   },
                   text: "Sign In",

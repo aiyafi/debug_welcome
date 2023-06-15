@@ -1,7 +1,6 @@
 import 'package:debug_welcome/components/button_login.dart';
 import 'package:debug_welcome/components/login_text_field.dart';
 import 'package:debug_welcome/pages/dasboard_page.dart';
-import 'package:debug_welcome/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,7 +21,7 @@ class _RegistPageFormState extends State<RegistPageForm> {
   void _NavigateLoginOnRegistState(BuildContext context) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => DashboardPage()),
+      MaterialPageRoute(builder: (context) => const DashboardPage()),
     );
   }
 

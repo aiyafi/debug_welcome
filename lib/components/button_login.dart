@@ -17,15 +17,15 @@ class ButtonLoginPage extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
-          primary: Color(0xFF142238),
+          backgroundColor: const Color(0xFF142238),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          fixedSize: Size(550, 55), // Atur lebar dan tinggi sesuai kebutuhan Anda
+          fixedSize: const Size(550, 55), // Atur lebar dan tinggi sesuai kebutuhan Anda
         ),
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 16,

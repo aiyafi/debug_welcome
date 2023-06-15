@@ -10,44 +10,44 @@ class RelaxView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firstHalfAnimation =
-        Tween<Offset>(begin: Offset(0, 1), end: Offset(0, 0)).animate(
+    final firstHalfAnimation =
+        Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Interval(
+        curve: const Interval(
           0.0,
           0.2,
           curve: Curves.fastOutSlowIn,
         ),
       ),
     );
-    final _secondHalfAnimation =
-        Tween<Offset>(begin: Offset(0, 0), end: Offset(-1, 0)).animate(
+    final secondHalfAnimation =
+        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-1, 0)).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Interval(
+        curve: const Interval(
           0.2,
           0.4,
           curve: Curves.fastOutSlowIn,
         ),
       ),
     );
-    final _textAnimation =
-        Tween<Offset>(begin: Offset(0, 0), end: Offset(-2, 0)).animate(
+    final textAnimation =
+        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-2, 0)).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Interval(
+        curve: const Interval(
           0.2,
           0.4,
           curve: Curves.fastOutSlowIn,
         ),
       ),
     );
-    final _imageAnimation =
-        Tween<Offset>(begin: Offset(0, 0), end: Offset(-4, 0)).animate(
+    final imageAnimation =
+        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-4, 0)).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Interval(
+        curve: const Interval(
           0.2,
           0.4,
           curve: Curves.fastOutSlowIn,
@@ -55,11 +55,11 @@ class RelaxView extends StatelessWidget {
       ),
     );
 
-    final _relaxAnimation =
-        Tween<Offset>(begin: Offset(0, -2), end: Offset(0, 0)).animate(
+    final relaxAnimation =
+        Tween<Offset>(begin: const Offset(0, -2), end: const Offset(0, 0)).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Interval(
+        curve: const Interval(
           0.0,
           0.2,
           curve: Curves.fastOutSlowIn,
@@ -67,18 +67,18 @@ class RelaxView extends StatelessWidget {
       ),
     );
     return SlideTransition(
-      position: _firstHalfAnimation,
+      position: firstHalfAnimation,
       child: SlideTransition(
-        position: _secondHalfAnimation,
+        position: secondHalfAnimation,
         child: Padding(
           padding: const EdgeInsets.only(bottom: 100),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SlideTransition(
-                position: _relaxAnimation,
+                position: relaxAnimation,
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: 1),
+                  padding: const EdgeInsets.only(bottom: 1),
                   child: Text(
                     "Simplify",
                     style: GoogleFonts.poppins(
@@ -87,8 +87,8 @@ class RelaxView extends StatelessWidget {
                 ),
               ),
               SlideTransition(
-                position: _textAnimation,
-                child: Padding(
+                position: textAnimation,
+                child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 64, vertical: 25),
                   child: Text(
                     "Simplify your inventory management process with MenRis.",
@@ -100,12 +100,12 @@ class RelaxView extends StatelessWidget {
                 ),
               ),
               SlideTransition(
-                position: _imageAnimation,
+                position: imageAnimation,
                 child: Padding(
                   padding:
-                      EdgeInsets.only(top: 16), // Ubah jarak vertikal di sini
+                      const EdgeInsets.only(top: 16), // Ubah jarak vertikal di sini
                   child: Container(
-                    constraints: BoxConstraints(maxWidth: 350, maxHeight: 250),
+                    constraints: const BoxConstraints(maxWidth: 350, maxHeight: 250),
                     child: SvgPicture.asset(
                       'assets/introduction_animation/simplify.svg',
                       width: 200, // Ubah lebar sesuai kebutuhan Anda

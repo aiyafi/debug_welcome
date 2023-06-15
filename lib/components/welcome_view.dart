@@ -9,22 +9,22 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firstHalfAnimation =
-        Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0)).animate(
+    final firstHalfAnimation =
+        Tween<Offset>(begin: const Offset(1, 0), end: const Offset(0, 0)).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Interval(
+        curve: const Interval(
           0.6,
           0.8,
           curve: Curves.fastOutSlowIn,
         ),
       ),
     );
-    final _secondHalfAnimation =
-        Tween<Offset>(begin: Offset(0, 0), end: Offset(-1, 0)).animate(
+    final secondHalfAnimation =
+        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-1, 0)).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Interval(
+        curve: const Interval(
           0.8,
           1.0,
           curve: Curves.fastOutSlowIn,
@@ -32,40 +32,40 @@ class WelcomeView extends StatelessWidget {
       ),
     );
 
-    final _welcomeFirstHalfAnimation =
-        Tween<Offset>(begin: Offset(2, 0), end: Offset(0, 0))
+    final welcomeFirstHalfAnimation =
+        Tween<Offset>(begin: const Offset(2, 0), end: const Offset(0, 0))
             .animate(CurvedAnimation(
       parent: animationController,
-      curve: Interval(
+      curve: const Interval(
         0.6,
         0.8,
         curve: Curves.fastOutSlowIn,
       ),
     ));
 
-    final _welcomeImageAnimation =
-        Tween<Offset>(begin: Offset(4, 0), end: Offset(0, 0))
+    final welcomeImageAnimation =
+        Tween<Offset>(begin: const Offset(4, 0), end: const Offset(0, 0))
             .animate(CurvedAnimation(
       parent: animationController,
-      curve: Interval(
+      curve: const Interval(
         0.6,
         0.8,
         curve: Curves.fastOutSlowIn,
       ),
     ));
     return SlideTransition(
-      position: _firstHalfAnimation,
+      position: firstHalfAnimation,
       child: SlideTransition(
-        position: _secondHalfAnimation,
+        position: secondHalfAnimation,
         child: Padding(
           padding: const EdgeInsets.only(bottom: 60),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SlideTransition(
-                position: _welcomeImageAnimation,
+                position: welcomeImageAnimation,
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: 350, maxHeight: 350),
+                  constraints: const BoxConstraints(maxWidth: 350, maxHeight: 350),
                   child: SvgPicture.asset(
                     'assets/introduction_animation/welcomeimg.svg',
                     width: 250,
@@ -73,9 +73,9 @@ class WelcomeView extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 36),
+              const SizedBox(height: 36),
               SlideTransition(
-                position: _welcomeFirstHalfAnimation,
+                position: welcomeFirstHalfAnimation,
                 child: Text(
                   "Welcome to MenRis!",
                   style: GoogleFonts.poppins(
@@ -84,7 +84,7 @@ class WelcomeView extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding:
                     EdgeInsets.only(left: 66, right: 66, top: 16, bottom: 16),
                 child: Text(

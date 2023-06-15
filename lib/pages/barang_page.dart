@@ -4,6 +4,8 @@ import 'dart:async';
 import 'dart:convert';
 
 class BarangPage extends StatefulWidget {
+  const BarangPage({super.key});
+
   @override
   _BarangPageState createState() => _BarangPageState();
 }
@@ -61,20 +63,20 @@ class _BarangPageState extends State<BarangPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Barang'),
+        title: const Text('Barang'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Daftar Barang:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             if (daftarBarang.isEmpty)
-              Text('Barang masih kosong')
+              const Text('Barang masih kosong')
             else
               Column(
                 children: daftarBarang
@@ -86,13 +88,13 @@ class _BarangPageState extends State<BarangPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              icon: Icon(Icons.edit),
+                              icon: const Icon(Icons.edit),
                               onPressed: () {
                                 _editBarang(barang);
                               },
                             ),
                             IconButton(
-                              icon: Icon(Icons.delete),
+                              icon: const Icon(Icons.delete),
                               onPressed: () {
                                 _hapusBarang(barang);
                               },
@@ -103,12 +105,12 @@ class _BarangPageState extends State<BarangPage> {
                     )
                     .toList(),
               ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 _tambahBarang();
               },
-              child: Text('Tambah Barang'),
+              child: const Text('Tambah Barang'),
             ),
           ],
         ),
@@ -127,7 +129,7 @@ class _BarangPageState extends State<BarangPage> {
         String lokasiRuangan = '';
 
         return AlertDialog(
-          title: Text('Tambah Barang'),
+          title: const Text('Tambah Barang'),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,24 +138,24 @@ class _BarangPageState extends State<BarangPage> {
                   onChanged: (value) {
                     namaBarang = value;
                   },
-                  decoration: InputDecoration(hintText: 'Nama Barang'),
+                  decoration: const InputDecoration(hintText: 'Nama Barang'),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
                   onChanged: (value) {
                     jumlahBarang = int.tryParse(value) ?? 0;
                   },
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(hintText: 'Jumlah Barang'),
+                  decoration: const InputDecoration(hintText: 'Jumlah Barang'),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
                   onChanged: (value) {
                     deskripsiBarang = value;
                   },
-                  decoration: InputDecoration(hintText: 'Deskripsi Barang'),
+                  decoration: const InputDecoration(hintText: 'Deskripsi Barang'),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
                   value: kondisiBarang,
                   onChanged: (value) {
@@ -165,17 +167,17 @@ class _BarangPageState extends State<BarangPage> {
                             child: Text(kondisi),
                           ))
                       .toList(),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Kondisi Barang',
                     isDense: true,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
                   onChanged: (value) {
                     lokasiRuangan = value;
                   },
-                  decoration: InputDecoration(hintText: 'Lokasi Ruangan'),
+                  decoration: const InputDecoration(hintText: 'Lokasi Ruangan'),
                 ),
               ],
             ),
@@ -185,7 +187,7 @@ class _BarangPageState extends State<BarangPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Batal'),
+              child: const Text('Batal'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -200,7 +202,7 @@ class _BarangPageState extends State<BarangPage> {
                 });
                 Navigator.pop(context);
               },
-              child: Text('Simpan'),
+              child: const Text('Simpan'),
             ),
           ],
         );
@@ -219,7 +221,7 @@ class _BarangPageState extends State<BarangPage> {
         String lokasiRuangan = barang['lokasi_ruangan'];
 
         return AlertDialog(
-          title: Text('Edit Barang'),
+          title: const Text('Edit Barang'),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -228,28 +230,28 @@ class _BarangPageState extends State<BarangPage> {
                   onChanged: (value) {
                     namaBarang = value;
                   },
-                  decoration: InputDecoration(hintText: 'Nama Barang'),
+                  decoration: const InputDecoration(hintText: 'Nama Barang'),
                   controller: TextEditingController(text: namaBarang),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
                   onChanged: (value) {
                     jumlahBarang = int.tryParse(value) ?? 0;
                   },
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(hintText: 'Jumlah Barang'),
+                  decoration: const InputDecoration(hintText: 'Jumlah Barang'),
                   controller:
                       TextEditingController(text: jumlahBarang.toString()),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
                   onChanged: (value) {
                     deskripsiBarang = value;
                   },
-                  decoration: InputDecoration(hintText: 'Deskripsi Barang'),
+                  decoration: const InputDecoration(hintText: 'Deskripsi Barang'),
                   controller: TextEditingController(text: deskripsiBarang),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
                   value: kondisiBarang,
                   onChanged: (value) {
@@ -261,17 +263,17 @@ class _BarangPageState extends State<BarangPage> {
                             child: Text(kondisi),
                           ))
                       .toList(),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Kondisi Barang',
                     isDense: true,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
                   onChanged: (value) {
                     lokasiRuangan = value;
                   },
-                  decoration: InputDecoration(hintText: 'Lokasi Ruangan'),
+                  decoration: const InputDecoration(hintText: 'Lokasi Ruangan'),
                   controller: TextEditingController(text: lokasiRuangan),
                 ),
               ],
@@ -282,7 +284,7 @@ class _BarangPageState extends State<BarangPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Batal'),
+              child: const Text('Batal'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -295,7 +297,7 @@ class _BarangPageState extends State<BarangPage> {
                 });
                 Navigator.pop(context);
               },
-              child: Text('Simpan'),
+              child: const Text('Simpan'),
             ),
           ],
         );
@@ -308,14 +310,14 @@ class _BarangPageState extends State<BarangPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Hapus Barang'),
-          content: Text('Apakah Anda yakin ingin menghapus barang ini?'),
+          title: const Text('Hapus Barang'),
+          content: const Text('Apakah Anda yakin ingin menghapus barang ini?'),
           actions: [
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Batal'),
+              child: const Text('Batal'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -324,7 +326,7 @@ class _BarangPageState extends State<BarangPage> {
                 });
                 Navigator.pop(context);
               },
-              child: Text('Hapus'),
+              child: const Text('Hapus'),
             ),
           ],
         );
