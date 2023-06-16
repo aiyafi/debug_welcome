@@ -14,6 +14,9 @@ class _BarangPageState extends State<BarangPage> {
   List daftarBarang = [];
   List daftarRuangan = [];
 
+  Color backgroundColor = const Color(0xFFf7ebe1);
+  Color appBarColor = const Color(0xff132137);
+
   Future _getRuangan() async {
     try {
       final response = await http.get(
@@ -64,7 +67,9 @@ class _BarangPageState extends State<BarangPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Barang'),
+        backgroundColor: appBarColor,
       ),
+      backgroundColor: backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -111,6 +116,7 @@ class _BarangPageState extends State<BarangPage> {
                 _tambahBarang();
               },
               child: const Text('Tambah Barang'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
           ],
         ),
@@ -127,10 +133,10 @@ class _BarangPageState extends State<BarangPage> {
         TextEditingController deskripsiBarang = TextEditingController();
         String kondisiBarang = 'Layak';
         int? lokasiRuangan;
-        List<int> listRuangan = [];
+        List<String> listRuangan = [];
 
         for (var i=0; i<daftarRuangan.length;i++) {
-          listRuangan.add(int.parse(daftarRuangan[i]['id']));
+          listRuangan.add(daftarRuangan[i]['nama_ruangan'].toString());
         }
 
         Future _add() async {
@@ -194,16 +200,16 @@ class _BarangPageState extends State<BarangPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                DropdownButton<int>(
-                  value: lokasiRuangan,
-                  items: listRuangan.map((int option) {
-                    return DropdownMenuItem<int>(
+                DropdownButton<String>(
+                  value: listRuangan.first,
+                  items: listRuangan.map((option) {
+                    return DropdownMenuItem<String>(
                       value: option,
-                      child: Text(daftarRuangan[option-1]['nama_ruangan'].toString()),
+                      child: Text(option),
                     );
                   }).toList(),
-                  onChanged: (int? value) {
-                    lokasiRuangan = value!;
+                  onChanged: (value) {
+                    lokasiRuangan = int.parse(value!);
                   },
                 ),
               ],
@@ -215,6 +221,7 @@ class _BarangPageState extends State<BarangPage> {
                 Navigator.pop(context);
               },
               child: const Text('Batal'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
             ElevatedButton(
               onPressed: () {
@@ -232,6 +239,7 @@ class _BarangPageState extends State<BarangPage> {
                 Navigator.pop(context);
               },
               child: const Text('Simpan'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
           ],
         );
@@ -246,10 +254,10 @@ class _BarangPageState extends State<BarangPage> {
     TextEditingController deskripsiBarang = TextEditingController();
     String kondisiBarang = 'Layak';
     int? lokasiRuangan;
-    List<int> listRuangan = [];
+    List<String> listRuangan = [];
 
     for (var i=0; i<daftarRuangan.length;i++) {
-      listRuangan.add(int.parse(daftarRuangan[i]['id']));
+      listRuangan.add(daftarRuangan[i]['nama_ruangan'].toString());
     }
 
     Future _edit() async {
@@ -315,16 +323,16 @@ class _BarangPageState extends State<BarangPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                DropdownButton<int>(
-                  value: lokasiRuangan,
-                  items: listRuangan.map((int option) {
-                    return DropdownMenuItem<int>(
+                DropdownButton<String>(
+                  value: listRuangan.first,
+                  items: listRuangan.map((option) {
+                    return DropdownMenuItem<String>(
                       value: option,
-                      child: Text(daftarRuangan[option-1]['nama_ruangan'].toString()),
+                      child: Text(option),
                     );
                   }).toList(),
-                  onChanged: (int? value) {
-                    lokasiRuangan = value!;
+                  onChanged: (value) {
+                    lokasiRuangan = int.parse(value!);
                   },
                 ),
               ],
@@ -336,6 +344,7 @@ class _BarangPageState extends State<BarangPage> {
                 Navigator.pop(context);
               },
               child: const Text('Batal'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
             ElevatedButton(
               onPressed: () {
@@ -347,6 +356,7 @@ class _BarangPageState extends State<BarangPage> {
                 Navigator.pop(context);
               },
               child: const Text('Simpan'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
           ],
         );
@@ -386,6 +396,7 @@ class _BarangPageState extends State<BarangPage> {
                 Navigator.pop(context);
               },
               child: const Text('Batal'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
             ElevatedButton(
               onPressed: () {
@@ -397,6 +408,7 @@ class _BarangPageState extends State<BarangPage> {
                 Navigator.pop(context);
               },
               child: const Text('Hapus'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
           ],
         );

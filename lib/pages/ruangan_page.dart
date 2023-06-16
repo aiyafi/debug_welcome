@@ -14,6 +14,9 @@ class _RuanganPageState extends State<RuanganPage> {
   List daftarRuangan = [];
   String selectedRuangan = '';
 
+  Color backgroundColor = const Color(0xFFf7ebe1);
+  Color appBarColor = const Color(0xff132137);
+
   Future _getData() async {
     try {
       final response = await http.get(
@@ -44,8 +47,10 @@ class _RuanganPageState extends State<RuanganPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: appBarColor,
         title: const Text('Ruangan'),
       ),
+      backgroundColor: backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -94,6 +99,7 @@ class _RuanganPageState extends State<RuanganPage> {
                 _tambahRuangan();
               },
               child: const Text('Tambah Ruangan'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
           ],
         ),
@@ -129,13 +135,11 @@ class _RuanganPageState extends State<RuanganPage> {
             decoration: const InputDecoration(hintText: 'Nama Ruangan'),
           ),
           actions: [
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 _add().then((value) {
                   if(value) {
-                    SnackBar(
-                      content: const Text("Data Berhasil di Tambahkan"),
-                    );
+                    print("Sukses");
                   } else {
                     SnackBar(
                       content: const Text("Data Gagal di Tambahkan"),
@@ -145,12 +149,14 @@ class _RuanganPageState extends State<RuanganPage> {
                 Navigator.pop(context);
               },
               child: const Text('Tambah'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               child: const Text('Batal'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
           ],
         );
@@ -191,7 +197,7 @@ class _RuanganPageState extends State<RuanganPage> {
             ),
           ),
           actions: [
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 _edit().then((value) {
                   if(value) {
@@ -203,12 +209,14 @@ class _RuanganPageState extends State<RuanganPage> {
                 Navigator.pop(context);
               },
               child: const Text('Simpan'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               child: const Text('Batal'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
           ],
         );
@@ -243,7 +251,7 @@ class _RuanganPageState extends State<RuanganPage> {
           title: const Text('Hapus Ruangan'),
           content: const Text('Apakah Anda yakin ingin menghapus ruangan ini?'),
           actions: [
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 _delete().then((value) {
                   if(value) {
@@ -256,12 +264,14 @@ class _RuanganPageState extends State<RuanganPage> {
                 Navigator.pop(context);
               },
               child: const Text('Hapus'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               child: const Text('Batal'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF132137)),
             ),
           ],
         );
