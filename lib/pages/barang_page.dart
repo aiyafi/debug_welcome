@@ -82,7 +82,7 @@ class _BarangPageState extends State<BarangPage> {
                 children: daftarBarang
                     .map(
                       (barang) => ListTile(
-                        title: Text(barang['nama_barang']),
+                        title: Text(barang['nama_barang'] + " (${barang['nama_ruangan']})"),
                         subtitle: Text('Jumlah: ${barang['jumlah_barang']}'),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -90,13 +90,13 @@ class _BarangPageState extends State<BarangPage> {
                             IconButton(
                               icon: const Icon(Icons.edit),
                               onPressed: () {
-                                _editBarang(barang);
+                                _editBarang(barang['id']);
                               },
                             ),
                             IconButton(
                               icon: const Icon(Icons.delete),
                               onPressed: () {
-                                _hapusBarang(barang);
+                                _hapusBarang(barang['id']);
                               },
                             ),
                           ],
@@ -122,11 +122,38 @@ class _BarangPageState extends State<BarangPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        String namaBarang = '';
-        int jumlahBarang = 0;
-        String deskripsiBarang = '';
+        TextEditingController namaBarang = TextEditingController();
+        TextEditingController jumlahBarang = TextEditingController();
+        TextEditingController deskripsiBarang = TextEditingController();
         String kondisiBarang = 'Layak';
-        String lokasiRuangan = '';
+        int? lokasiRuangan;
+        List<int> listRuangan = [];
+
+        for (var i=0; i<daftarRuangan.length;i++) {
+          listRuangan.add(int.parse(daftarRuangan[i]['id']));
+        }
+
+        Future _add() async {
+          final response = await http.post(
+            Uri.parse('https://192.168.1.7/api_inventaris/create.php'),
+            body: {
+              "id_ruang" : lokasiRuangan.toString(),
+              "nama_barang" : namaBarang.text.toString(),
+              "jumlah_barang" : jumlahBarang.text.toString(),
+              "deskripsi_barang" : deskripsiBarang.text.toString(),
+              "kondisi_barang" : kondisiBarang.toString(),
+              "image_url" : ""
+            });
+
+          if (response.statusCode == 200) {
+            print("Sukses");
+            return true;
+          }
+          print("Gagal");
+          return false;
+        }
+
+
 
         return AlertDialog(
           title: const Text('Tambah Barang'),
@@ -135,24 +162,18 @@ class _BarangPageState extends State<BarangPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextField(
-                  onChanged: (value) {
-                    namaBarang = value;
-                  },
+                  controller: namaBarang,
                   decoration: const InputDecoration(hintText: 'Nama Barang'),
                 ),
                 const SizedBox(height: 8),
                 TextField(
-                  onChanged: (value) {
-                    jumlahBarang = int.tryParse(value) ?? 0;
-                  },
+                  controller: jumlahBarang,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(hintText: 'Jumlah Barang'),
                 ),
                 const SizedBox(height: 8),
                 TextField(
-                  onChanged: (value) {
-                    deskripsiBarang = value;
-                  },
+                  controller: deskripsiBarang,
                   decoration: const InputDecoration(hintText: 'Deskripsi Barang'),
                 ),
                 const SizedBox(height: 8),
@@ -173,11 +194,17 @@ class _BarangPageState extends State<BarangPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                TextField(
-                  onChanged: (value) {
-                    lokasiRuangan = value;
+                DropdownButton<int>(
+                  value: lokasiRuangan,
+                  items: listRuangan.map((int option) {
+                    return DropdownMenuItem<int>(
+                      value: option,
+                      child: Text(daftarRuangan[option-1]['nama_ruangan'].toString()),
+                    );
+                  }).toList(),
+                  onChanged: (int? value) {
+                    lokasiRuangan = value!;
                   },
-                  decoration: const InputDecoration(hintText: 'Lokasi Ruangan'),
                 ),
               ],
             ),
@@ -191,14 +218,16 @@ class _BarangPageState extends State<BarangPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  daftarBarang.add({
-                    'nama_barang': namaBarang,
-                    'jumlah_barang': jumlahBarang,
-                    'deskripsi_barang': deskripsiBarang,
-                    'kondisi_barang': kondisiBarang,
-                    'lokasi_ruangan': lokasiRuangan,
-                  });
+                _add().then((value) {
+                  if(value) {
+                    SnackBar(
+                      content: const Text("Data Berhasil di Tambahkan"),
+                    );
+                  } else {
+                    SnackBar(
+                      content: const Text("Data Gagal di Tambahkan"),
+                    );
+                  }
                 });
                 Navigator.pop(context);
               },
@@ -210,15 +239,43 @@ class _BarangPageState extends State<BarangPage> {
     );
   }
 
-  void _editBarang(Map<String, dynamic> barang) {
+  void _editBarang(String id) {
+    String idB = id;
+    TextEditingController namaBarang = TextEditingController();
+    TextEditingController jumlahBarang = TextEditingController();
+    TextEditingController deskripsiBarang = TextEditingController();
+    String kondisiBarang = 'Layak';
+    int? lokasiRuangan;
+    List<int> listRuangan = [];
+
+    for (var i=0; i<daftarRuangan.length;i++) {
+      listRuangan.add(int.parse(daftarRuangan[i]['id']));
+    }
+
+    Future _edit() async {
+      final response = await http.post(
+          Uri.parse('https://192.168.1.7/api_inventaris/edit_barang.php'),
+          body: {
+            "id" : idB,
+            "id_ruang" : lokasiRuangan.toString(),
+            "nama_barang" : namaBarang.text.toString(),
+            "jumlah_barang" : jumlahBarang.text.toString(),
+            "deskripsi_barang" : deskripsiBarang.text.toString(),
+            "kondisi_barang" : kondisiBarang.toString(),
+            "image_url" : ""
+          });
+
+      if (response.statusCode == 200) {
+        print("Sukses");
+        return true;
+      }
+      print("Gagal");
+      return false;
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        String namaBarang = barang['nama_barang'];
-        int jumlahBarang = barang['jumlah_barang'];
-        String deskripsiBarang = barang['deskripsi_barang'];
-        String kondisiBarang = barang['kondisi_barang'];
-        String lokasiRuangan = barang['lokasi_ruangan'];
 
         return AlertDialog(
           title: const Text('Edit Barang'),
@@ -227,29 +284,18 @@ class _BarangPageState extends State<BarangPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextField(
-                  onChanged: (value) {
-                    namaBarang = value;
-                  },
+                  controller: namaBarang,
                   decoration: const InputDecoration(hintText: 'Nama Barang'),
-                  controller: TextEditingController(text: namaBarang),
                 ),
                 const SizedBox(height: 8),
                 TextField(
-                  onChanged: (value) {
-                    jumlahBarang = int.tryParse(value) ?? 0;
-                  },
+                  controller: jumlahBarang,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(hintText: 'Jumlah Barang'),
-                  controller:
-                      TextEditingController(text: jumlahBarang.toString()),
                 ),
                 const SizedBox(height: 8),
                 TextField(
-                  onChanged: (value) {
-                    deskripsiBarang = value;
-                  },
                   decoration: const InputDecoration(hintText: 'Deskripsi Barang'),
-                  controller: TextEditingController(text: deskripsiBarang),
                 ),
                 const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
@@ -269,12 +315,17 @@ class _BarangPageState extends State<BarangPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                TextField(
-                  onChanged: (value) {
-                    lokasiRuangan = value;
+                DropdownButton<int>(
+                  value: lokasiRuangan,
+                  items: listRuangan.map((int option) {
+                    return DropdownMenuItem<int>(
+                      value: option,
+                      child: Text(daftarRuangan[option-1]['nama_ruangan'].toString()),
+                    );
+                  }).toList(),
+                  onChanged: (int? value) {
+                    lokasiRuangan = value!;
                   },
-                  decoration: const InputDecoration(hintText: 'Lokasi Ruangan'),
-                  controller: TextEditingController(text: lokasiRuangan),
                 ),
               ],
             ),
@@ -288,12 +339,10 @@ class _BarangPageState extends State<BarangPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  barang['nama_barang'] = namaBarang;
-                  barang['jumlah_barang'] = jumlahBarang;
-                  barang['deskripsi_barang'] = deskripsiBarang;
-                  barang['kondisi_barang'] = kondisiBarang;
-                  barang['lokasi_ruangan'] = lokasiRuangan;
+                _edit().then((value) {
+                  if(value) {
+                    print("sukses");
+                  }
                 });
                 Navigator.pop(context);
               },
@@ -305,7 +354,26 @@ class _BarangPageState extends State<BarangPage> {
     );
   }
 
-  void _hapusBarang(Map<String, dynamic> barang) {
+  void _hapusBarang(String id) {
+    String idB = id;
+
+    Future _delete() async {
+      final response = await http.post(
+          Uri.parse('https://192.168.1.7/api_inventaris/hapus_barang.php'),
+          body: {
+            "id" : idB,
+          });
+
+      if (response.statusCode == 200) {
+        print("Sukses");
+        return true;
+      } else {
+
+      }
+      print("Gagal");
+      return false;
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -321,8 +389,10 @@ class _BarangPageState extends State<BarangPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  daftarBarang.remove(barang);
+                _delete().then((value) {
+                  if(value) {
+                    print("SUkses");
+                  }
                 });
                 Navigator.pop(context);
               },

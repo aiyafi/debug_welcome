@@ -73,13 +73,13 @@ class _RuanganPageState extends State<RuanganPage> {
                             IconButton(
                               icon: const Icon(Icons.edit),
                               onPressed: () {
-                                _editRuangan(ruangan);
+                                _editRuangan(daftarRuangan[daftarRuangan.indexOf(ruangan)]['id'].toString());
                               },
                             ),
                             IconButton(
                               icon: const Icon(Icons.delete),
                               onPressed: () {
-                                _hapusRuangan(ruangan);
+                                _hapusRuangan(daftarRuangan[daftarRuangan.indexOf(ruangan)]['id'].toString());
                               },
                             ),
                           ],
@@ -102,23 +102,45 @@ class _RuanganPageState extends State<RuanganPage> {
   }
 
   void _tambahRuangan() {
+    TextEditingController nama_ruangan = TextEditingController();
+
+    Future _add() async {
+      final response = await http.post(
+          Uri.parse('https://192.168.1.7/api_inventaris/create_ruang.php'),
+          body: {
+            "nama_ruangan" : nama_ruangan.text.toString(),
+          });
+
+      if (response.statusCode == 200) {
+        print("Sukses");
+        return true;
+      }
+      print("Gagal");
+      return false;
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        String namaRuangan = '';
         return AlertDialog(
           title: const Text('Tambah Ruangan'),
           content: TextField(
-            onChanged: (value) {
-              namaRuangan = value;
-            },
+            controller: nama_ruangan,
             decoration: const InputDecoration(hintText: 'Nama Ruangan'),
           ),
           actions: [
             TextButton(
               onPressed: () {
-                setState(() {
-                  daftarRuangan.add(namaRuangan);
+                _add().then((value) {
+                  if(value) {
+                    SnackBar(
+                      content: const Text("Data Berhasil di Tambahkan"),
+                    );
+                  } else {
+                    SnackBar(
+                      content: const Text("Data Gagal di Tambahkan"),
+                    );
+                  }
                 });
                 Navigator.pop(context);
               },
@@ -136,24 +158,47 @@ class _RuanganPageState extends State<RuanganPage> {
     );
   }
 
-  void _editRuangan(String ruangan) {
+  void _editRuangan(String id) {
+    TextEditingController namaRuangan = TextEditingController();
+    String idR = id;
+
+    Future _edit() async {
+      final response = await http.post(
+          Uri.parse('https://192.168.1.7/api_inventaris/edit_ruang.php'),
+          body: {
+            "id" : idR,
+            "nama_ruangan" : namaRuangan.text.toString(),
+          });
+
+      if (response.statusCode == 200) {
+        print("Sukses");
+        return true;
+      }
+      print("Gagal");
+      return false;
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        String namaRuangan = ruangan;
         return AlertDialog(
-          title: const Text('Edit Ruangan'),
+          title: const Text("Edit Ruangan"),
           content: TextField(
-            onChanged: (value) {
-              namaRuangan = value;
-            },
-            decoration: const InputDecoration(hintText: 'Nama Ruangan'),
+            controller: namaRuangan,
+            autofocus: true,
+            decoration: const InputDecoration(
+              hintText: 'Nama Ruangan',
+            ),
           ),
           actions: [
             TextButton(
               onPressed: () {
-                setState(() {
-                  daftarRuangan[daftarRuangan.indexOf(ruangan)] = namaRuangan;
+                _edit().then((value) {
+                  if(value) {
+                    print("Sukses");
+                  } else {
+                    print("Gagal");
+                  }
                 });
                 Navigator.pop(context);
               },
@@ -171,7 +216,26 @@ class _RuanganPageState extends State<RuanganPage> {
     );
   }
 
-  void _hapusRuangan(String ruangan) {
+  void _hapusRuangan(String id) {
+    String idR = id;
+
+    Future _delete() async {
+      final response = await http.post(
+          Uri.parse('https://192.168.1.7/api_inventaris/hapus_ruang.php'),
+          body: {
+            "id" : idR,
+          });
+
+      if (response.statusCode == 200) {
+        print("Sukses");
+        return true;
+      } else {
+
+      }
+      print("Gagal");
+      return false;
+    }
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -181,8 +245,13 @@ class _RuanganPageState extends State<RuanganPage> {
           actions: [
             TextButton(
               onPressed: () {
-                setState(() {
-                  daftarRuangan.remove(ruangan);
+                _delete().then((value) {
+                  if(value) {
+                    print("Sukses");
+                  } else {
+                    print("Gagal");
+                  }
+
                 });
                 Navigator.pop(context);
               },
