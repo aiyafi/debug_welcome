@@ -3,6 +3,7 @@ import 'package:debug_welcome/components/login_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/pages/dasboard_page.dart';
+import 'signup_page.dart';
 
 class LoginPageForm extends StatefulWidget {
   const LoginPageForm({Key? key});
@@ -101,6 +102,12 @@ class _LoginPageFormState extends State<LoginPageForm> {
                           color: Color(0xff132137),
                         ),
                       ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const RegistPageForm()),
+                        );
+                      }
                     ),
                   ],
                 ),

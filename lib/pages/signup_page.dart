@@ -1,8 +1,12 @@
 import 'package:debug_welcome/components/button_login.dart';
 import 'package:debug_welcome/components/login_text_field.dart';
-import 'package:debug_welcome/pages/dasboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'login_page.dart';
 
 class RegistPageForm extends StatefulWidget {
   const RegistPageForm({super.key});
@@ -16,13 +20,45 @@ class _RegistPageFormState extends State<RegistPageForm> {
   final nameTextController = TextEditingController();
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
-  final confirmPasswordTextController = TextEditingController();
 
-  void _NavigateLoginOnRegistState(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const DashboardPage()),
-    );
+  Future _regist() async {
+    final response = await http.post(
+        Uri.parse('https://192.168.1.7/api_inventaris/register.php'),
+        body: {
+          "name" : nameTextController.text.toString(),
+          "email" : emailTextController.text.toString(),
+          "password" : passwordTextController.text.toString(),
+        });
+
+    final data = jsonDecode(response.body);
+    if(data == "Berhasil") {
+      final snackBar = SnackBar(
+        content: const Text('Yay! A SnackBar!'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            // Some code to undo the change.
+          },
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginPageForm()),
+      );
+    } else {
+      final snackBar = SnackBar(
+        content: const Text('Yay! A SnackBar!'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            // Some code to undo the change.
+          },
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
   }
 
   @override
@@ -96,11 +132,11 @@ class _RegistPageFormState extends State<RegistPageForm> {
                 ),
 
                 //Confirm PW
-                LoginTextField(
-                  controller: confirmPasswordTextController,
-                  hiddenPassword: true,
-                  hintLoginText: "Confirm password",
-                ),
+                // LoginTextField(
+                //   controller: confirmPasswordTextController,
+                //   hiddenPassword: true,
+                //   hintLoginText: "Confirm password",
+                // ),
 
                 const SizedBox(
                   height: 55,
@@ -109,7 +145,8 @@ class _RegistPageFormState extends State<RegistPageForm> {
                 //Btn
                 ButtonLoginPage(
                   onTap: () {
-                    _NavigateLoginOnRegistState(context);
+                    _regist();
+                    // print("object");
                   },
                   text: "Sign Up",
                 ),
@@ -132,7 +169,12 @@ class _RegistPageFormState extends State<RegistPageForm> {
                       width: 8,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const LoginPageForm()),
+                        );
+                      },
                       child: const Text(
                         "Login",
                         style: TextStyle(
