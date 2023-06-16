@@ -133,10 +133,10 @@ class _BarangPageState extends State<BarangPage> {
         TextEditingController deskripsiBarang = TextEditingController();
         String kondisiBarang = 'Layak';
         int? lokasiRuangan;
-        List<String> listRuangan = [];
+        List<int> listRuangan = [];
 
         for (var i=0; i<daftarRuangan.length;i++) {
-          listRuangan.add(daftarRuangan[i]['nama_ruangan'].toString());
+          listRuangan.add(int.parse(daftarRuangan[i]['id']));
         }
 
         Future _add() async {
@@ -200,16 +200,15 @@ class _BarangPageState extends State<BarangPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                DropdownButton<String>(
-                  value: listRuangan.first,
-                  items: listRuangan.map((option) {
-                    return DropdownMenuItem<String>(
+                DropdownButton<int>(
+                  items: listRuangan.map((int option) {
+                    return DropdownMenuItem<int>(
                       value: option,
-                      child: Text(option),
+                      child: Text(option.toString()),
                     );
                   }).toList(),
                   onChanged: (value) {
-                    lokasiRuangan = int.parse(value!);
+                    lokasiRuangan = value!;
                   },
                 ),
               ],
@@ -227,13 +226,9 @@ class _BarangPageState extends State<BarangPage> {
               onPressed: () {
                 _add().then((value) {
                   if(value) {
-                    SnackBar(
-                      content: const Text("Data Berhasil di Tambahkan"),
-                    );
+                    print("Sukses");
                   } else {
-                    SnackBar(
-                      content: const Text("Data Gagal di Tambahkan"),
-                    );
+                    print("Gagal");
                   }
                 });
                 Navigator.pop(context);
@@ -254,10 +249,10 @@ class _BarangPageState extends State<BarangPage> {
     TextEditingController deskripsiBarang = TextEditingController();
     String kondisiBarang = 'Layak';
     int? lokasiRuangan;
-    List<String> listRuangan = [];
+    List<int> listRuangan = [];
 
     for (var i=0; i<daftarRuangan.length;i++) {
-      listRuangan.add(daftarRuangan[i]['nama_ruangan'].toString());
+      listRuangan.add(int.parse(daftarRuangan[i]['id']));
     }
 
     Future _edit() async {
@@ -323,16 +318,15 @@ class _BarangPageState extends State<BarangPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                DropdownButton<String>(
-                  value: listRuangan.first,
-                  items: listRuangan.map((option) {
-                    return DropdownMenuItem<String>(
+                DropdownButton<int>(
+                  items: listRuangan.map((int option) {
+                    return DropdownMenuItem<int>(
                       value: option,
-                      child: Text(option),
+                      child: Text(option.toString()),
                     );
                   }).toList(),
                   onChanged: (value) {
-                    lokasiRuangan = int.parse(value!);
+                    lokasiRuangan = value!;
                   },
                 ),
               ],
