@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/pages/dasboard_page.dart';
 import 'signup_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
 
 class LoginPageForm extends StatefulWidget {
   const LoginPageForm({Key? key});
@@ -15,12 +18,38 @@ class LoginPageForm extends StatefulWidget {
 class _LoginPageFormState extends State<LoginPageForm> {
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
+  String email = "";
 
-  void _navigateToDashboard(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const DashboardPage()),
-    );
+  // void _navigateToDashboard(BuildContext context) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => const DashboardPage()),
+  //   );
+  // }
+
+  Future _login() async {
+    final response = await http.post(
+        Uri.parse('https://192.168.1.7/api_inventaris/login.php'),
+        body: {
+          "email" : emailTextController.text.toString(),
+          "password" : passwordTextController.text.toString(),
+        });
+
+    final data = jsonDecode(response.body);
+    if(data == "Error") {
+      final snackBar = SnackBar(
+        content: const Text('Maaf email atau salah!!!'),
+        backgroundColor: Colors.red,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      email = emailTextController.text;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => DashboardPage(user: email,)),
+      );
+    }
+
   }
 
   @override
@@ -72,10 +101,7 @@ class _LoginPageFormState extends State<LoginPageForm> {
                 ),
                 ButtonLoginPage(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const DashboardPage()),
-                    );
+                    _login();
                   },
                   text: "Sign In",
                 ),
@@ -103,10 +129,7 @@ class _LoginPageFormState extends State<LoginPageForm> {
                         ),
                       ),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const RegistPageForm()),
-                        );
+                        Navigator.pop(context);
                       }
                     ),
                   ],

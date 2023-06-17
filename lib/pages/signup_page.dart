@@ -34,12 +34,7 @@ class _RegistPageFormState extends State<RegistPageForm> {
     if(data == "Berhasil") {
       final snackBar = SnackBar(
         content: const Text('Yay! A SnackBar!'),
-        action: SnackBarAction(
-          label: 'Undo',
-          onPressed: () {
-            // Some code to undo the change.
-          },
-        ),
+        backgroundColor: Colors.green,
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       Navigator.push(
@@ -48,13 +43,9 @@ class _RegistPageFormState extends State<RegistPageForm> {
       );
     } else {
       final snackBar = SnackBar(
-        content: const Text('Yay! A SnackBar!'),
-        action: SnackBarAction(
-          label: 'Undo',
-          onPressed: () {
-            // Some code to undo the change.
-          },
-        ),
+        content: const Text('Maaf email sudah terdaftar!!!'),
+        backgroundColor: Colors.red,
+
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }

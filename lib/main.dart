@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const OnBoardingScreen(),
         '/login': (context) => const LoginPageForm(),
-        '/dashboard': (context) => const DashboardPage(),
+        // '/dashboard': (context) => const DashboardPage(),
       },
     );
   }
