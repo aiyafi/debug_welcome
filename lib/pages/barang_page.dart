@@ -20,7 +20,7 @@ class _BarangPageState extends State<BarangPage> {
   Future _getRuangan() async {
     try {
       final response = await http.get(
-          Uri.parse('https://192.168.1.7/api_inventaris/ruangan_read.php'));
+          Uri.parse('https://10.0.2.2/api_inventaris/ruangan_read.php'));
 
       if (response.statusCode == 200) {
         print(response.body);
@@ -38,7 +38,7 @@ class _BarangPageState extends State<BarangPage> {
   Future _getData() async {
     try {
       final response = await http
-          .get(Uri.parse('https://192.168.1.7/api_inventaris/getdata.php'));
+          .get(Uri.parse('https://10.0.2.2/api_inventaris/getdata.php'));
 
       if (response.statusCode == 200) {
         // print(response.body);
@@ -141,7 +141,7 @@ class _BarangPageState extends State<BarangPage> {
 
         Future _add() async {
           final response = await http.post(
-            Uri.parse('https://192.168.1.7/api_inventaris/create.php'),
+            Uri.parse('https://10.0.2.2/api_inventaris/create.php'),
             body: {
               "id_ruang" : lokasiRuangan.toString(),
               "nama_barang" : namaBarang.text.toString(),
@@ -257,7 +257,7 @@ class _BarangPageState extends State<BarangPage> {
 
     Future _edit() async {
       final response = await http.post(
-          Uri.parse('https://192.168.1.7/api_inventaris/edit_barang.php'),
+          Uri.parse('https://10.0.2.2/api_inventaris/edit_barang.php'),
           body: {
             "id" : idB,
             "id_ruang" : lokasiRuangan.toString(),
@@ -363,7 +363,7 @@ class _BarangPageState extends State<BarangPage> {
 
     Future _delete() async {
       final response = await http.post(
-          Uri.parse('https://192.168.1.7/api_inventaris/hapus_barang.php'),
+          Uri.parse('https://10.0.2.2/api_inventaris/hapus_barang.php'),
           body: {
             "id" : idB,
           });

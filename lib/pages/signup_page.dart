@@ -23,7 +23,7 @@ class _RegistPageFormState extends State<RegistPageForm> {
 
   Future _regist() async {
     final response = await http.post(
-        Uri.parse('https://192.168.1.7/api_inventaris/register.php'),
+        Uri.parse('https://10.0.2.2/api_inventaris/register.php'),
         body: {
           "name" : nameTextController.text.toString(),
           "email" : emailTextController.text.toString(),
@@ -33,7 +33,7 @@ class _RegistPageFormState extends State<RegistPageForm> {
     final data = jsonDecode(response.body);
     if(data == "Berhasil") {
       final snackBar = SnackBar(
-        content: const Text('Yay! A SnackBar!'),
+        content: const Text('Registrasi berhasil! Silakan masuk menggunakan akun yang telah dibuat.'),
         backgroundColor: Colors.green,
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -43,7 +43,7 @@ class _RegistPageFormState extends State<RegistPageForm> {
       );
     } else {
       final snackBar = SnackBar(
-        content: const Text('Maaf email sudah terdaftar!!!'),
+        content: const Text('Maaf, akun sudah pernah terdaftar.'),
         backgroundColor: Colors.red,
 
       );

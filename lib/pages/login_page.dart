@@ -29,7 +29,7 @@ class _LoginPageFormState extends State<LoginPageForm> {
 
   Future _login() async {
     final response = await http.post(
-        Uri.parse('https://192.168.1.7/api_inventaris/login.php'),
+        Uri.parse('https://10.0.2.2/api_inventaris/login.php'),
         body: {
           "email" : emailTextController.text.toString(),
           "password" : passwordTextController.text.toString(),
@@ -38,7 +38,7 @@ class _LoginPageFormState extends State<LoginPageForm> {
     final data = jsonDecode(response.body);
     if(data == "Error") {
       final snackBar = SnackBar(
-        content: const Text('Maaf email atau salah!!!'),
+        content: const Text('Email atau password salah. Silakan coba lagi.'),
         backgroundColor: Colors.red,
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
